@@ -43,7 +43,8 @@ double stringToGPSTime(std::string& input, double header_time)
   tm_GPSTime.tm_hour = stod(input.substr(0,2)) + 9;
   tm_GPSTime.tm_min = stod(input.substr(2,2));
   tm_GPSTime.tm_sec = stod(input.substr(4,2));
-  GPSTime_msec = stod(input.substr(6));
+  // GPSTime_msec = stod(input.substr(6));
+  GPSTime_msec = 0.0;
 
   GPSTime = mktime(&tm_GPSTime) + GPSTime_msec + Leaptime;
 
