@@ -90,7 +90,8 @@ void rtk_dead_reckoning_estimate_(geometry_msgs::msg::Vector3Stamped enu_vel, nm
     enu_rtk[1] = tmp_pos.getY();
     enu_rtk[2] = tmp_pos.getZ();
 
-    if (rtk_dead_reckoning_status->position_stamp_last != gga_time && gga.gps_qual == 4)
+    bool fixed = gga.gps_qual == 1 || gga.gps_qual == 2 || gga.gps_qual == 4;
+    if (rtk_dead_reckoning_status->position_stamp_last != gga_time && fixed)
     {
       rtk_dead_reckoning_status->provisional_enu_pos_x = enu_rtk[0];
       rtk_dead_reckoning_status->provisional_enu_pos_y = enu_rtk[1];

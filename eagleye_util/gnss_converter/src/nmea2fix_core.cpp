@@ -114,7 +114,7 @@ void gnss_converter_converter(const nmea_msgs::msg::Sentence sentence, sensor_ms
         fix->altitude = gga->alt + gga->undulation;
         fix->status.service = 1;
 
-        if(gga->gps_qual == 4)
+        if(gga->gps_qual == 4 || gga->gps_qual == 1  || gga->gps_qual == 2)
         {
           fix->status.status = 0;
         }

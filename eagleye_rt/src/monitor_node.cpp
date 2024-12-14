@@ -823,8 +823,10 @@ void printStatus(void)
 
   if (_gga_sub_status)
   {
+    int gps_qual = int(_gga.gps_qual);
+    bool fixed = gps_qual == 1 || gps_qual == 2 || gps_qual == 4;
     std::cout<< "\033[1m rtk status \033[m "<<int(_gga.gps_qual)<<std::endl;
-    std::cout<< "\033[1m rtk status \033[m "<<(int(_gga.gps_qual)!=4 ? "\033[1;31mNo Fix\033[m" : "\033[1;32mFix\033[m")<<std::endl;
+    std::cout<< "\033[1m rtk status \033[m "<<(!fixed ? "\033[1;31mNo Fix\033[m" : "\033[1;32mFix\033[m")<<std::endl;
     std::cout<<"\033[1m latitude  \033[m"<<std::setprecision(8)<<_gga.lat<<" [deg]"<<std::endl;
     std::cout<<"\033[1m longitude  \033[m"<<std::setprecision(8)<<_gga.lon<<" [deg]"<<std::endl;
     std::cout<<"\033[1m altitude  \033[m"<<std::setprecision(4)<<_gga.alt + _gga.undulation<<" [m]"<<std::endl;

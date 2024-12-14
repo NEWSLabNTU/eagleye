@@ -103,7 +103,8 @@ void pitching_estimate(const sensor_msgs::msg::Imu imu, const nmea_msgs::msg::Gp
   }
 
 ///  buffering  ///
-  if (distance.distance-height_status->distance_last >= height_parameter.update_distance && gnss_status == true && gps_quality == 4)
+  bool fixed = gps_quality == 1 || gps_quality == 2 || gps_quality == 4;
+  if (distance.distance-height_status->distance_last >= height_parameter.update_distance && gnss_status == true && fixed)
   {
     height_status->height_buffer.push_back(gnss_height);
     height_status->relative_height_G_buffer.push_back(height_status->relative_height_G);
